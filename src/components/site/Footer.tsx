@@ -10,7 +10,8 @@ export function Footer() {
               GOFTUS
             </Link>
             <p className="mt-6 text-muted-foreground text-sm max-w-xs">
-              The autonomous infrastructure for the next generation of enterprise automation.
+              AI automation agency and AI agent development company building agentic AI and custom
+              AI solutions for businesses across the US, UK, Europe, Dubai, Singapore &amp; Malaysia.
             </p>
           </div>
           <div>

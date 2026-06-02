@@ -5,6 +5,7 @@ import { CTASection } from "@/components/site/CTASection";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getPost, type Post } from "@/data/posts";
 import { getStoredPosts } from "@/lib/content-store";
+import { keywords, CORE_KEYWORDS } from "@/data/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
   // Seed posts resolve at the server for full SSR/SEO; admin-created posts
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { title: `${post.title} — GOFTUS Blog` },
         { name: "description", content: post.excerpt },
         { name: "author", content: post.author },
-        { name: "keywords", content: `${post.cat}, AI agents, agentic AI, automation, GOFTUS` },
+        { name: "keywords", content: keywords([post.cat], CORE_KEYWORDS) },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.excerpt },
         { property: "og:type", content: "article" },

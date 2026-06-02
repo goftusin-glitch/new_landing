@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { keywords, CORE_KEYWORDS } from "../data/seo";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "GOFTUS — AI Agents & Automation for Enterprise" },
-      { name: "description", content: "GOFTUS builds autonomous AI agents and agentic systems that integrate with enterprise infrastructure to automate complex workflows." },
+      { title: "GOFTUS — AI Automation Agency & AI Agent Development Company" },
+      { name: "description", content: "GOFTUS is an AI automation agency and AI agent development company building agentic AI, custom AI solutions, and workflow automation for businesses across the US, UK, Europe, Dubai, Singapore & Malaysia." },
+      { name: "keywords", content: keywords(CORE_KEYWORDS) },
       { name: "author", content: "GOFTUS" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1" },
       { property: "og:site_name", content: "GOFTUS" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

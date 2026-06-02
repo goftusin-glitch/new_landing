@@ -4,14 +4,19 @@ import { CTASection } from "@/components/site/CTASection";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { PRODUCT_ICONS } from "@/data/products";
 import { useStoredProducts } from "@/lib/content-store";
+import { keywords, PRODUCTS_KEYWORDS, MARKETS_LABEL } from "@/data/seo";
+
+const PRODUCTS_TITLE = "AI Products — AI Agents, Automation & Knowledge Assistants We've Built | GOFTUS";
+const PRODUCTS_DESC = `Explore AI products built by GOFTUS — AI agents, automation tools, AI chatbots and knowledge assistants shipped to production for businesses across ${MARKETS_LABEL}.`;
 
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Products — GOFTUS" },
-      { name: "description", content: "Products GOFTUS has built — AI agents, automation, knowledge assistants, and more, shipped to production." },
-      { property: "og:title", content: "Products — GOFTUS" },
-      { property: "og:description", content: "Products GOFTUS has built — AI agents, automation, knowledge assistants, and more, shipped to production." },
+      { title: PRODUCTS_TITLE },
+      { name: "description", content: PRODUCTS_DESC },
+      { name: "keywords", content: keywords(PRODUCTS_KEYWORDS) },
+      { property: "og:title", content: PRODUCTS_TITLE },
+      { property: "og:description", content: PRODUCTS_DESC },
       { property: "og:url", content: "/products" },
     ],
     links: [{ rel: "canonical", href: "/products" }],

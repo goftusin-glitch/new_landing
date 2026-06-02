@@ -95,7 +95,11 @@
       "Bash(git remote *)",
       "Bash(git checkout *)",
       "Bash(git add *)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(git push *)",
+      "WebSearch",
+      "Bash(curl -s http://localhost:8080/agents)",
+      "Bash(curl -s http://localhost:8080/contact)"
     ]
   }
 }

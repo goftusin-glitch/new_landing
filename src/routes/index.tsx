@@ -5,14 +5,19 @@ import { FluidParticlesBackground } from "@/components/ui/fluid-particles-backgr
 import { Reveal } from "@/components/site/Reveal";
 import { HowItWorks } from "@/components/site/HowItWorks";
 import { ArrowRight, Plus, Bot, Boxes, Zap, Rocket, Workflow, Database, Headphones, ShieldCheck, Plug, Building2, LifeBuoy, FileText, Users, HeartPulse, Landmark, ShoppingBag, Truck, Building, GraduationCap, Factory, Scale, Network } from "lucide-react";
+import { keywords, CORE_KEYWORDS, AREA_SERVED, MARKETS_LABEL } from "@/data/seo";
+
+const HOME_TITLE = "AI Automation Agency & AI Agent Development Company — GOFTUS";
+const HOME_DESC = `GOFTUS builds AI agents, agentic AI systems, AI automation, and custom AI solutions for businesses of every size — serving startups and enterprises across ${MARKETS_LABEL}.`;
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "GOFTUS — AI Agents, Agentic AI & Automation for Every Business" },
-      { name: "description", content: "GOFTUS builds AI agents, agentic AI systems, AI automation, and AI-powered products for businesses of every size — from startups to enterprises." },
-      { property: "og:title", content: "GOFTUS — AI Agents, Agentic AI & Automation for Every Business" },
-      { property: "og:description", content: "GOFTUS builds AI agents, agentic AI systems, AI automation, and AI-powered products for businesses of every size — from startups to enterprises." },
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESC },
+      { name: "keywords", content: keywords(CORE_KEYWORDS) },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESC },
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -22,8 +27,17 @@ export const Route = createFileRoute("/")({
         "@context": "https://schema.org",
         "@type": "Organization",
         name: "GOFTUS",
-        description: "GOFTUS builds AI agents, agentic AI systems, AI automation, and AI-powered products for businesses of every size.",
+        description: HOME_DESC,
         url: "/",
+        areaServed: AREA_SERVED,
+        knowsAbout: [
+          "AI agents",
+          "Agentic AI",
+          "AI automation",
+          "Custom AI solutions",
+          "AI consulting",
+          "Workflow automation",
+        ],
       }),
     }],
   }),
@@ -62,8 +76,9 @@ function HomePage() {
             Intelligence that <span className="text-accent">actually</span> acts.
           </h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground text-pretty mb-12 animate-fade-up [animation-delay:200ms]">
-            Goftus builds autonomous AI agentic systems that integrate deeply with your existing
-            business infrastructure to automate complex workflows.
+            GOFTUS is an AI automation agency and AI agent development company building autonomous
+            agentic AI systems and custom AI solutions that integrate deeply with your business
+            infrastructure to automate complex workflows.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up [animation-delay:300ms]">
             <Link to="/contact" className="font-romanica tracking-wide w-full sm:w-auto px-8 py-4 bg-foreground text-background rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition-all">
@@ -79,7 +94,7 @@ function HomePage() {
       {/* Who we build for */}
       <Reveal className="max-w-7xl mx-auto px-6 py-12 border-y border-border">
         <p className="text-center text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-10">
-          Built for businesses of every size and stage
+          Trusted for AI automation across the US, UK, Europe, Dubai, Singapore &amp; Malaysia
         </p>
         <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-60">
           {segments.map((seg, i) => (

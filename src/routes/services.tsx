@@ -2,14 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { CTASection } from "@/components/site/CTASection";
 import { Boxes, Bot, Workflow, Puzzle, Compass, GraduationCap } from "lucide-react";
+import { keywords, SERVICES_KEYWORDS, MARKETS_LABEL } from "@/data/seo";
+
+const SERVICES_TITLE = "AI Automation Services — AI Development, Consulting & Workflow Automation | GOFTUS";
+const SERVICES_DESC = `AI automation services: AI product development, agentic systems, intelligent automation, custom AI solutions, AI consulting and enterprise integration — for businesses across ${MARKETS_LABEL}.`;
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — GOFTUS" },
-      { name: "description", content: "AI product development, agentic systems, automation, custom solutions, consulting and education." },
-      { property: "og:title", content: "Services — GOFTUS" },
-      { property: "og:description", content: "AI product development, agentic systems, automation, custom solutions, consulting and education." },
+      { title: SERVICES_TITLE },
+      { name: "description", content: SERVICES_DESC },
+      { name: "keywords", content: keywords(SERVICES_KEYWORDS) },
+      { property: "og:title", content: SERVICES_TITLE },
+      { property: "og:description", content: SERVICES_DESC },
       { property: "og:url", content: "/services" },
     ],
     links: [{ rel: "canonical", href: "/services" }],

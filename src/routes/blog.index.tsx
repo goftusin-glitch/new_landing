@@ -3,14 +3,19 @@ import { useMemo, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Search } from "lucide-react";
 import { useStoredPosts } from "@/lib/content-store";
+import { keywords, BLOG_KEYWORDS } from "@/data/seo";
+
+const BLOG_TITLE = "AI Agents & Automation Blog — Agentic AI Insights & Guides | GOFTUS";
+const BLOG_DESC = "Field notes on AI agents, agentic AI, and AI automation — practical guides on deploying AI agents and custom AI solutions for business.";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
-      { title: "Blog — GOFTUS" },
-      { name: "description", content: "Field notes on agentic AI, automation, and how to deploy intelligence in the enterprise." },
-      { property: "og:title", content: "Blog — GOFTUS" },
-      { property: "og:description", content: "Field notes on agentic AI, automation, and how to deploy intelligence in the enterprise." },
+      { title: BLOG_TITLE },
+      { name: "description", content: BLOG_DESC },
+      { name: "keywords", content: keywords(BLOG_KEYWORDS) },
+      { property: "og:title", content: BLOG_TITLE },
+      { property: "og:description", content: BLOG_DESC },
       { property: "og:url", content: "/blog" },
     ],
     links: [{ rel: "canonical", href: "/blog" }],

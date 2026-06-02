@@ -2,14 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Mail, Calendar, Twitter, Linkedin, Github } from "lucide-react";
+import { keywords, CONTACT_KEYWORDS, MARKETS_LABEL } from "@/data/seo";
+
+const CONTACT_TITLE = "Contact GOFTUS — Hire AI Developers & Build Your AI Agent | Free Consultation";
+const CONTACT_DESC = `Hire AI developers and build your AI agent with GOFTUS. Book a demo or get a free AI automation consultation — serving businesses across ${MARKETS_LABEL}.`;
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — GOFTUS" },
-      { name: "description", content: "Book a demo, talk to founders, or send us a message about your AI agent project." },
-      { property: "og:title", content: "Contact — GOFTUS" },
-      { property: "og:description", content: "Book a demo, talk to founders, or send us a message about your AI agent project." },
+      { title: CONTACT_TITLE },
+      { name: "description", content: CONTACT_DESC },
+      { name: "keywords", content: keywords(CONTACT_KEYWORDS) },
+      { property: "og:title", content: CONTACT_TITLE },
+      { property: "og:description", content: CONTACT_DESC },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],

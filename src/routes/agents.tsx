@@ -5,14 +5,19 @@ import {
   Headphones, Mic, TrendingUp, Settings, Users, BookOpen,
   MessageCircle, Sparkles, Brain, Wrench, Database, Workflow, BarChart3, ArrowRight,
 } from "lucide-react";
+import { keywords, AGENTS_KEYWORDS, MARKETS_LABEL } from "@/data/seo";
+
+const AGENTS_TITLE = "AI Agents Development Company — Custom AI Agents & Multi-Agent Systems | GOFTUS";
+const AGENTS_DESC = `Custom AI agent development — support, sales, voice, WhatsApp, ops and knowledge agents, plus multi-agent systems and RAG. AI agents for business across ${MARKETS_LABEL}.`;
 
 export const Route = createFileRoute("/agents")({
   head: () => ({
     meta: [
-      { title: "AI Agents — GOFTUS" },
-      { name: "description", content: "Specialized AI agents for support, sales, ops, HR, and knowledge — built for business automation." },
-      { property: "og:title", content: "AI Agents — GOFTUS" },
-      { property: "og:description", content: "Specialized AI agents for support, sales, ops, HR, and knowledge — built for business automation." },
+      { title: AGENTS_TITLE },
+      { name: "description", content: AGENTS_DESC },
+      { name: "keywords", content: keywords(AGENTS_KEYWORDS) },
+      { property: "og:title", content: AGENTS_TITLE },
+      { property: "og:description", content: AGENTS_DESC },
       { property: "og:url", content: "/agents" },
     ],
     links: [{ rel: "canonical", href: "/agents" }],

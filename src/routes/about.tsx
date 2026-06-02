@@ -12,14 +12,19 @@ import g12 from "@/assets/gallery-12.png";
 import g13 from "@/assets/gallery-13.png";
 import g14 from "@/assets/gallery-14.png";
 import g15 from "@/assets/gallery-15.png";
+import { keywords, ABOUT_KEYWORDS } from "@/data/seo";
+
+const ABOUT_TITLE = "About GOFTUS — AI Automation Agency & Agentic AI Experts";
+const ABOUT_DESC = "GOFTUS is an AI automation agency founded in 2025 by Thirumurugan and Bharathvaj — engineers specializing in AI and full-stack development — building AI agents, products, and custom AI solutions for businesses worldwide.";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — GOFTUS" },
-      { name: "description", content: "GOFTUS was founded in 2025 by Thirumurugan and Bharathvaj — engineers specializing in AI and full-stack development — building AI agents, products, and custom automation for businesses." },
-      { property: "og:title", content: "About — GOFTUS" },
-      { property: "og:description", content: "GOFTUS was founded in 2025 by Thirumurugan and Bharathvaj — engineers specializing in AI and full-stack development — building AI agents, products, and custom automation for businesses." },
+      { title: ABOUT_TITLE },
+      { name: "description", content: ABOUT_DESC },
+      { name: "keywords", content: keywords(ABOUT_KEYWORDS) },
+      { property: "og:title", content: ABOUT_TITLE },
+      { property: "og:description", content: ABOUT_DESC },
       { property: "og:url", content: "/about" },
     ],
     links: [{ rel: "canonical", href: "/about" }],

@@ -65,7 +65,13 @@ export const Route = createFileRoute("/")({
           "@type": "Organization",
           name: "GOFTUS",
           description: HOME_DESC,
-          url: "/",
+          url: "https://goftus.com",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://goftus.com/favicon.png",
+            width: 512,
+            height: 512,
+          },
           areaServed: AREA_SERVED,
           knowsAbout: [
             "AI agents",

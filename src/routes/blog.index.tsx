@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Search } from "lucide-react";
 import { useStoredPosts } from "@/lib/content-store";
@@ -10,6 +10,10 @@ const BLOG_TITLE = "AI Agents & Automation Blog — Agentic AI Insights & Guides
 const BLOG_DESC = "Field notes on AI agents, agentic AI, and AI automation — practical guides on deploying AI agents and custom AI solutions for business.";
 
 export const Route = createFileRoute("/blog/")({
+  loader: async () => {
+    const posts = await fetchPostsFromBackend().catch(() => []);
+    return { posts };
+  },
   head: () => ({
     meta: [
       { title: BLOG_TITLE },
@@ -116,29 +120,12 @@ function BlogSkeleton() {
 }
 
 function BlogPage() {
+  const { posts: loaderPosts } = Route.useLoaderData();
   const fallbackPosts = useStoredPosts();
-  const [backendPosts, setBackendPosts] = useState<typeof fallbackPosts>([]);
-  const [loading, setLoading] = useState(true);
-  const posts = backendPosts.length ? backendPosts : fallbackPosts;
+  const posts = loaderPosts.length ? loaderPosts : fallbackPosts;
+  const loading = false;
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<(typeof categories)[number]>("All");
-
-  useEffect(() => {
-    let cancelled = false;
-    fetchPostsFromBackend()
-      .then((items) => {
-        if (!cancelled) setBackendPosts(items);
-      })
-      .catch(() => {
-        if (!cancelled) setBackendPosts([]);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   const filtered = useMemo(() => {
     return posts.filter((p) =>

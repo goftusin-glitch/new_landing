@@ -10,6 +10,42 @@ import { keywords, CORE_KEYWORDS, AREA_SERVED, MARKETS_LABEL } from "@/data/seo"
 const HOME_TITLE = "AI Automation Agency & AI Agent Development Company — GOFTUS";
 const HOME_DESC = `GOFTUS builds AI agents, agentic AI systems, AI automation, and custom AI solutions for businesses of every size — serving startups and enterprises across ${MARKETS_LABEL}.`;
 
+// Most-asked questions about AI for business processes & operations.
+const HOME_FAQS = [
+  {
+    q: "How can AI automation improve our business processes?",
+    a: "AI automation removes repetitive, manual steps — data entry, follow-ups, reporting, routing — so your team focuses on higher-value work. AI agents can run these processes 24/7, reduce errors, and speed up turnaround across sales, support, and back-office operations.",
+  },
+  {
+    q: "What business operations can AI agents handle?",
+    a: "Customer support, sales outreach and lead qualification, order and invoice processing, HR onboarding, knowledge lookups, scheduling, and multi-step internal workflows. We build agents specialized to your operations and connect them to your existing tools.",
+  },
+  {
+    q: "How do AI agents integrate with our existing tools and software?",
+    a: "Our agents use tool-calling and APIs to connect with the systems you already run — CRMs, helpdesks, databases, spreadsheets, WhatsApp, email, and internal apps — so automation fits your current stack instead of replacing it.",
+  },
+  {
+    q: "How long does it take to deploy AI automation?",
+    a: "A focused pilot can ship in a few weeks. Larger, multi-agent automations are scoped to your needs and rolled out in stages so you see results early and scale what works.",
+  },
+  {
+    q: "Do we need a large technical team or lots of data to start?",
+    a: "No. We handle the build end to end, and most operations automations work with the data and documents you already have. You can start small with one process and expand from there.",
+  },
+  {
+    q: "Is our business data safe with AI automation?",
+    a: "Yes. We deploy in your cloud or ours, with guardrails, encryption, and audit trails, and we scope each agent to only the data and actions it needs.",
+  },
+  {
+    q: "What is the ROI of AI automation for operations?",
+    a: "Most clients measure ROI in hours saved, faster response and processing times, fewer errors, and the ability to scale operations without scaling headcount. We focus on automations tied to real business numbers, not demos.",
+  },
+  {
+    q: "Can startups and small businesses use AI automation too?",
+    a: "Absolutely. We build for every size — from startups automating their first workflow to enterprises running multi-agent systems across departments.",
+  },
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -21,25 +57,39 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "GOFTUS",
-        description: HOME_DESC,
-        url: "/",
-        areaServed: AREA_SERVED,
-        knowsAbout: [
-          "AI agents",
-          "Agentic AI",
-          "AI automation",
-          "Custom AI solutions",
-          "AI consulting",
-          "Workflow automation",
-        ],
-      }),
-    }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "GOFTUS",
+          description: HOME_DESC,
+          url: "/",
+          areaServed: AREA_SERVED,
+          knowsAbout: [
+            "AI agents",
+            "Agentic AI",
+            "AI automation",
+            "Custom AI solutions",
+            "AI consulting",
+            "Workflow automation",
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: HOME_FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: HomePage,
 });
@@ -329,6 +379,33 @@ function HomePage() {
           </footer>
         </blockquote>
         </Reveal>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-6 pb-32">
+        <Reveal className="max-w-2xl mb-16">
+          <span className="text-[10px] font-mono text-accent uppercase tracking-widest">FAQ</span>
+          <h2 className="font-typemachine text-3xl md:text-5xl font-bold tracking-tight mt-4">
+            AI for business, answered.
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Common questions about using AI agents and automation across your business processes and
+            operations.
+          </p>
+        </Reveal>
+        <div className="space-y-4">
+          {HOME_FAQS.map((f, i) => (
+            <Reveal as="div" key={f.q} delay={i * 0.04}>
+              <details className="group bg-surface rounded-2xl ring-1 ring-border open:ring-accent transition-all">
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none p-6">
+                  <span className="font-typemachine text-lg font-bold tracking-tight">{f.q}</span>
+                  <Plus className="size-5 shrink-0 text-accent transition-transform group-open:rotate-45" />
+                </summary>
+                <p className="px-6 pb-6 -mt-1 text-muted-foreground leading-relaxed">{f.a}</p>
+              </details>
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       <CTASection />

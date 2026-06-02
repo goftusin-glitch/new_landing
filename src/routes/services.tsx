@@ -2,10 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { CTASection } from "@/components/site/CTASection";
 import { Boxes, Bot, Workflow, Puzzle, Compass, GraduationCap } from "lucide-react";
-import { keywords, SERVICES_KEYWORDS, MARKETS_LABEL } from "@/data/seo";
+import { keywords, SERVICES_KEYWORDS, MARKETS_LABEL, AREA_SERVED } from "@/data/seo";
 
 const SERVICES_TITLE = "AI Automation Services — AI Development, Consulting & Workflow Automation | GOFTUS";
 const SERVICES_DESC = `AI automation services: AI product development, agentic systems, intelligent automation, custom AI solutions, AI consulting and enterprise integration — for businesses across ${MARKETS_LABEL}.`;
+
+const SERVICE_OFFERINGS = [
+  "AI Product Development",
+  "Agentic AI Systems",
+  "AI Automation & Workflow Automation",
+  "Custom AI Solutions & Enterprise Integration",
+  "AI Consulting & Strategy",
+  "AI Education & Training",
+];
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -18,6 +27,25 @@ export const Route = createFileRoute("/services")({
       { property: "og:url", content: "/services" },
     ],
     links: [{ rel: "canonical", href: "/services" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "AI Automation & AI Agent Development",
+        provider: { "@type": "Organization", name: "GOFTUS" },
+        description: SERVICES_DESC,
+        areaServed: AREA_SERVED,
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "AI Services",
+          itemListElement: SERVICE_OFFERINGS.map((name) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name },
+          })),
+        },
+      }),
+    }],
   }),
   component: ServicesPage,
 });

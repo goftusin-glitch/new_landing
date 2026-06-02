@@ -7,6 +7,13 @@ import { keywords, CONTACT_KEYWORDS, MARKETS_LABEL } from "@/data/seo";
 const CONTACT_TITLE = "Contact GOFTUS — Hire AI Developers & Build Your AI Agent | Free Consultation";
 const CONTACT_DESC = `Hire AI developers and build your AI agent with GOFTUS. Book a demo or get a free AI automation consultation — serving businesses across ${MARKETS_LABEL}.`;
 
+const faqs = [
+  { q: "How fast can we build something?", a: "Small pilots can ship in a few weeks; larger builds are scoped to what you need." },
+  { q: "Do you handle integrations?", a: "Yes — we connect agents and automation to the tools, data, and channels you already use." },
+  { q: "Where does our data live?", a: "Your cloud or ours — your call. Built with guardrails, encryption, and audit trails." },
+  { q: "Can we start small?", a: "Absolutely. Most projects begin with a focused pilot before we scale it up." },
+];
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -18,16 +25,21 @@ export const Route = createFileRoute("/contact")({
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }),
+    }],
   }),
   component: ContactPage,
 });
-
-const faqs = [
-  { q: "How fast can we build something?", a: "Small pilots can ship in a few weeks; larger builds are scoped to what you need." },
-  { q: "Do you handle integrations?", a: "Yes — we connect agents and automation to the tools, data, and channels you already use." },
-  { q: "Where does our data live?", a: "Your cloud or ours — your call. Built with guardrails, encryption, and audit trails." },
-  { q: "Can we start small?", a: "Absolutely. Most projects begin with a focused pilot before we scale it up." },
-];
 
 function ContactPage() {
   const [sent, setSent] = useState(false);

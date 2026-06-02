@@ -1,0 +1,119 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="30%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#c47028" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#c47028" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="80%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#c47028" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#c47028" stop-opacity="0"/>
+    </radialGradient>
+    <!-- grid pattern -->
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#110e0b"/>
+
+  <!-- Grid -->
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Glow blobs -->
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <!-- Top accent line -->
+  <rect x="80" y="0" width="160" height="3" fill="#c47028" rx="2"/>
+
+  <!-- GOFTUS wordmark -->
+  <text
+    x="80" y="220"
+    font-family="Arial Black, Impact, sans-serif"
+    font-size="110"
+    font-weight="900"
+    letter-spacing="-2"
+    fill="white"
+  >GOFTUS</text>
+
+  <!-- Category pill -->
+  <rect x="80" y="248" width="290" height="36" rx="18" fill="rgba(196,112,40,0.15)" stroke="#c47028" stroke-width="1" stroke-opacity="0.4"/>
+  <text x="99" y="271" font-family="Courier New, monospace" font-size="13" font-weight="600" letter-spacing="3" fill="#c47028" text-transform="uppercase">AI AUTOMATION AGENCY</text>
+
+  <!-- Tagline -->
+  <text
+    x="80" y="360"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="36"
+    font-weight="700"
+    fill="white"
+    opacity="0.92"
+  >Intelligence that actually acts.</text>
+
+  <!-- Description -->
+  <text
+    x="80" y="418"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="22"
+    fill="rgba(255,255,255,0.5)"
+  >AI agents · Agentic AI · Workflow automation for every business.</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="488" x2="560" y2="488" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+  <!-- URL -->
+  <text
+    x="80" y="548"
+    font-family="Courier New, monospace"
+    font-size="20"
+    font-weight="600"
+    letter-spacing="1"
+    fill="#c47028"
+  >goftus.com</text>
+
+  <!-- Serving markets -->
+  <text
+    x="80" y="584"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="15"
+    fill="rgba(255,255,255,0.3)"
+  >US · UK · Europe · Dubai · Singapore · Malaysia</text>
+
+  <!-- Right side decorative hex grid -->
+  <g opacity="0.18">
+    <!-- Row 1 -->
+    <polygon points="820,120 860,97 900,120 900,166 860,189 820,166" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="900,120 940,97 980,120 980,166 940,189 900,166" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="980,120 1020,97 1060,120 1060,166 1020,189 980,166" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1060,120 1100,97 1140,120 1140,166 1100,189 1060,166" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <!-- Row 2 (offset) -->
+    <polygon points="860,189 900,166 940,189 940,235 900,258 860,235" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="940,189 980,166 1020,189 1020,235 980,258 940,235" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1020,189 1060,166 1100,189 1100,235 1060,258 1020,235" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1100,189 1140,166 1180,189 1180,235 1140,258 1100,235" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <!-- Row 3 -->
+    <polygon points="820,258 860,235 900,258 900,304 860,327 820,304" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="900,258 940,235 980,258 980,304 940,327 900,304" fill="#c47028" fill-opacity="0.06" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="980,258 1020,235 1060,258 1060,304 1020,327 980,304" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1060,258 1100,235 1140,258 1140,304 1100,327 1060,304" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <!-- Row 4 (offset) -->
+    <polygon points="860,327 900,304 940,327 940,373 900,396 860,373" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="940,327 980,304 1020,327 1020,373 980,396 940,373" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1020,327 1060,304 1100,327 1100,373 1060,396 1020,373" fill="#c47028" fill-opacity="0.08" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1100,327 1140,304 1180,327 1180,373 1140,396 1100,373" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <!-- Row 5 -->
+    <polygon points="820,396 860,373 900,396 900,442 860,465 820,442" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="900,396 940,373 980,396 980,442 940,465 900,442" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="980,396 1020,373 1060,396 1060,442 1020,465 980,442" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1060,396 1100,373 1140,396 1140,442 1100,465 1060,442" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <!-- Row 6 (offset) -->
+    <polygon points="860,465 900,442 940,465 940,511 900,534 860,511" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="940,465 980,442 1020,465 1020,511 980,534 940,511" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1020,465 1060,442 1100,465 1100,511 1060,534 1020,511" fill="none" stroke="#c47028" stroke-width="1.5"/>
+    <polygon points="1100,465 1140,442 1180,465 1180,511 1140,534 1100,511" fill="none" stroke="#c47028" stroke-width="1.5"/>
+  </g>
+
+  <!-- Bottom border -->
+  <rect x="0" y="626" width="1200" height="4" fill="#c47028" opacity="0.4"/>
+</svg>

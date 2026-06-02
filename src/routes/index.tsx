@@ -68,9 +68,9 @@ export const Route = createFileRoute("/")({
           url: "https://goftus.com",
           logo: {
             "@type": "ImageObject",
-            url: "https://goftus.com/favicon.png",
-            width: 512,
-            height: 512,
+            url: "https://goftus.com/og-image.svg",
+            width: 1200,
+            height: 630,
           },
           areaServed: AREA_SERVED,
           knowsAbout: [

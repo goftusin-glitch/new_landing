@@ -277,6 +277,12 @@ export const fetchProductsFromBackend = async () => {
   return products.map(mapBackendProduct);
 };
 
+export const fetchPostsSlice = async (limit: number) => {
+  const response = await fetch(`${API_BASE}/posts?page=1&limit=${limit}`);
+  const data = await parseJson<{ posts?: BackendPost[] }>(response);
+  return (data.posts || []).map(mapBackendPost);
+};
+
 export const fetchPostsFromBackend = async () => {
   try {
     const response = await fetch(`${API_BASE}/posts/hub`);

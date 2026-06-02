@@ -1,22 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Search } from "lucide-react";
 import { useStoredPosts } from "@/lib/content-store";
-import { fetchPostsFromBackend } from "@/lib/backend-api";
+import { fetchPostsFromBackend, fetchPostsSlice } from "@/lib/backend-api";
 import { keywords, BLOG_KEYWORDS } from "@/data/seo";
 
 const BLOG_TITLE = "AI Agents & Automation Blog — Agentic AI Insights & Guides | GOFTUS";
 const BLOG_DESC = "Field notes on AI agents, agentic AI, and AI automation — practical guides on deploying AI agents and custom AI solutions for business.";
 
 export const Route = createFileRoute("/blog/")({
-  loader: async () => {
-    const posts = await fetchPostsFromBackend().catch(() => []);
-    return { posts };
-  },
-  staleTime: 30_000,
-  pendingMs: 0,
-  pendingComponent: BlogSkeleton,
   head: () => ({
     meta: [
       { title: BLOG_TITLE },
@@ -123,12 +116,36 @@ function BlogSkeleton() {
 }
 
 function BlogPage() {
-  const { posts: loaderPosts } = Route.useLoaderData();
   const fallbackPosts = useStoredPosts();
-  const posts = loaderPosts.length ? loaderPosts : fallbackPosts;
-  const loading = false;
+  const [posts, setPosts] = useState(fallbackPosts);
+  const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<(typeof categories)[number]>("All");
+
+  useEffect(() => {
+    let cancelled = false;
+    // Phase 1 — fetch first 4 posts fast (small payload)
+    fetchPostsSlice(4)
+      .then((initial) => {
+        if (cancelled) return;
+        if (initial.length) setPosts(initial);
+        setLoading(false);
+        // Phase 2 — fetch all remaining in background
+        fetchPostsFromBackend()
+          .then((all) => { if (!cancelled && all.length) setPosts(all); })
+          .catch(() => {});
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setLoading(false);
+          // Fallback: try full fetch
+          fetchPostsFromBackend()
+            .then((all) => { if (!cancelled && all.length) setPosts(all); })
+            .catch(() => {});
+        }
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   const filtered = useMemo(() => {
     return posts.filter((p) =>

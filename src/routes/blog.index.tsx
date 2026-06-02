@@ -14,6 +14,9 @@ export const Route = createFileRoute("/blog/")({
     const posts = await fetchPostsFromBackend().catch(() => []);
     return { posts };
   },
+  staleTime: 30_000,
+  pendingMs: 0,
+  pendingComponent: BlogSkeleton,
   head: () => ({
     meta: [
       { title: BLOG_TITLE },

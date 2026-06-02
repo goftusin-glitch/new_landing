@@ -15,6 +15,13 @@ export const Route = createFileRoute("/blog/$slug")({
     if (seed) return seed;
     return fetchPostFromBackend(params.slug).catch(() => null);
   },
+  staleTime: 30_000,
+  pendingMs: 0,
+  pendingComponent: () => (
+    <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+    </div>
+  ),
   head: ({ loaderData: post }) => {
     if (!post) return {};
     const url = `/blog/${post.slug}`;
@@ -117,10 +124,10 @@ function BlogPostPage() {
             <img
               src={post.coverImage || post.thumbnailImage}
               alt={post.title}
-              className="aspect-[16/7] w-full rounded-[2rem] object-cover ring-1 ring-border"
+              className="aspect-16/7 w-full rounded-[2rem] object-cover ring-1 ring-border"
             />
           ) : (
-            <div className="aspect-[16/7] rounded-[2rem] bg-gradient-to-br from-accent/25 via-accent/10 to-transparent ring-1 ring-border" />
+            <div className="aspect-16/7 rounded-[2rem] bg-linear-to-br from-accent/25 via-accent/10 to-transparent ring-1 ring-border" />
           )}
         </div>
 

@@ -9,9 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SecurityRouteImport } from './routes/security'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -20,6 +23,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -30,9 +38,19 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -77,9 +95,12 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/agents': typeof AgentsRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
+  '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -89,9 +110,12 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/agents': typeof AgentsRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
+  '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog': typeof BlogIndexRoute
 }
@@ -102,9 +126,12 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/agents': typeof AgentsRoute
   '/contact': typeof ContactRoute
+  '/privacy': typeof PrivacyRoute
   '/products': typeof ProductsRoute
+  '/security': typeof SecurityRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/blog/': typeof BlogIndexRoute
 }
@@ -116,9 +143,12 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agents'
     | '/contact'
+    | '/privacy'
     | '/products'
+    | '/security'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesByTo: FileRoutesByTo
@@ -128,9 +158,12 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agents'
     | '/contact'
+    | '/privacy'
     | '/products'
+    | '/security'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/blog/$slug'
     | '/blog'
   id:
@@ -140,9 +173,12 @@ export interface FileRouteTypes {
     | '/admin'
     | '/agents'
     | '/contact'
+    | '/privacy'
     | '/products'
+    | '/security'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/blog/$slug'
     | '/blog/'
   fileRoutesById: FileRoutesById
@@ -153,15 +189,25 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AgentsRoute: typeof AgentsRoute
   ContactRoute: typeof ContactRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProductsRoute: typeof ProductsRoute
+  SecurityRoute: typeof SecurityRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -176,11 +222,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products': {
       id: '/products'
       path: '/products'
       fullPath: '/products'
       preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -241,9 +301,12 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AgentsRoute: AgentsRoute,
   ContactRoute: ContactRoute,
+  PrivacyRoute: PrivacyRoute,
   ProductsRoute: ProductsRoute,
+  SecurityRoute: SecurityRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

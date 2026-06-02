@@ -53,13 +53,13 @@ function TimelineNode({
 
   return (
     <div
-      className={`grid place-items-center size-14 rounded-2xl ring-1 shadow-sm transition-colors duration-500 ${
+      className={`grid place-items-center size-12 rounded-2xl ring-1 shadow-sm transition-colors duration-500 ${
         active
           ? "bg-accent text-accent-foreground ring-accent"
           : "bg-background text-accent ring-border"
       }`}
     >
-      <Icon className="size-6" />
+      <Icon className="size-5" />
     </div>
   );
 }
@@ -74,9 +74,9 @@ export function HowItWorks() {
   const fillScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section className="bg-surface border-y border-border py-32 overflow-hidden">
+    <section className="bg-surface border-y border-border py-20 lg:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <Reveal className="max-w-2xl mb-20">
+        <Reveal className="max-w-2xl mb-12 lg:mb-14">
           <span className="text-[10px] font-mono text-accent uppercase tracking-widest">How it works</span>
           <h2 className="font-typemachine text-4xl font-bold tracking-tight mt-4 mb-4">From signal to decision in seconds.</h2>
           <p className="text-muted-foreground">
@@ -94,14 +94,14 @@ export function HowItWorks() {
             className="absolute left-6 lg:left-1/2 lg:-translate-x-1/2 top-2 bottom-2 w-0.5 bg-accent origin-top"
           />
 
-          <div className="space-y-12 lg:space-y-24">
+          <div className="space-y-8 lg:space-y-12">
             {steps.map((step, i) => {
               const leftSide = i % 2 === 0;
               const threshold = (i + 0.5) / steps.length;
               return (
                 <div
                   key={step.title}
-                  className="relative pl-20 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-20 lg:items-center"
+                  className="relative pl-20 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-14 lg:items-center"
                 >
                   {/* Node on the spine */}
                   <div className="absolute left-6 lg:left-1/2 -translate-x-1/2 top-0 lg:top-1/2 lg:-translate-y-1/2 z-10">
@@ -111,7 +111,7 @@ export function HowItWorks() {
                   {/* Short connector from spine to card (desktop) */}
                   <div
                     className={`hidden lg:block absolute top-1/2 -translate-y-1/2 h-0.5 w-10 bg-border ${
-                      leftSide ? "right-1/2 mr-7" : "left-1/2 ml-7"
+                      leftSide ? "right-1/2 mr-6" : "left-1/2 ml-6"
                     }`}
                   />
 
@@ -121,11 +121,11 @@ export function HowItWorks() {
                     from={leftSide ? "left" : "right"}
                     className={
                       leftSide
-                        ? "lg:col-start-1 lg:flex lg:justify-end lg:pr-12"
-                        : "lg:col-start-2 lg:pl-12"
+                        ? "lg:col-start-1 lg:flex lg:justify-end lg:pr-8"
+                        : "lg:col-start-2 lg:pl-8"
                     }
                   >
-                    <div className="inline-block text-center bg-background rounded-2xl p-6 ring-1 ring-border transition-colors hover:ring-accent">
+                    <div className="w-full max-w-md text-center bg-background rounded-2xl p-5 ring-1 ring-border transition-colors hover:ring-accent">
                       <span className="text-[10px] font-mono text-accent uppercase tracking-widest">
                         Stage 0{i + 1}
                       </span>

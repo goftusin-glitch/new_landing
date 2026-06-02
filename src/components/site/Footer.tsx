@@ -1,5 +1,10 @@
 import { Link } from "@tanstack/react-router";
 
+const socialLinks = [
+  { name: "Instagram", href: "https://instagram.com/goftus_ai" },
+  { name: "WhatsApp", href: "https://wa.me/916380654780" },
+];
+
 export function Footer() {
   return (
     <footer className="border-t border-border py-20 bg-surface">
@@ -34,9 +39,9 @@ export function Footer() {
           <div>
             <p className="font-bold text-sm mb-6">Legal</p>
             <ul className="space-y-4 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-accent transition-colors">Privacy</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Terms</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Security</a></li>
+              <li><Link to="/privacy" className="hover:text-accent transition-colors">Privacy</Link></li>
+              <li><Link to="/terms" className="hover:text-accent transition-colors">Terms</Link></li>
+              <li><Link to="/security" className="hover:text-accent transition-colors">Security</Link></li>
             </ul>
           </div>
         </div>
@@ -45,9 +50,11 @@ export function Footer() {
             © 2026 GOFTUS Systems Inc. All rights reserved.
           </p>
           <div className="flex gap-6 text-muted-foreground text-[10px] font-mono uppercase tracking-widest">
-            <a href="#" className="hover:text-accent">Twitter</a>
-            <a href="#" className="hover:text-accent">LinkedIn</a>
-            <a href="#" className="hover:text-accent">GitHub</a>
+            {socialLinks.map((item) => (
+              <a key={item.name} href={item.href} target="_blank" rel="noreferrer" className="hover:text-accent">
+                {item.name}
+              </a>
+            ))}
           </div>
         </div>
       </div>

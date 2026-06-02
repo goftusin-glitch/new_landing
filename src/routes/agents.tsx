@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { CTASection } from "@/components/site/CTASection";
+import { Reveal } from "@/components/site/Reveal";
 import {
   Headphones, Mic, TrendingUp, Settings, Users, BookOpen,
   MessageCircle, Sparkles, Brain, Wrench, Database, Workflow, BarChart3, ArrowRight,
@@ -63,14 +64,18 @@ function AgentsPage() {
 
       {/* Categories */}
       <section className="max-w-7xl mx-auto px-6 pb-32">
-        <h2 className="font-typemachine text-3xl font-bold mb-12">Agent Categories</h2>
+        <Reveal>
+          <h2 className="font-typemachine text-3xl font-bold mb-12">Agent Categories</h2>
+        </Reveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {categories.map((c) => (
-            <div key={c.name} className="group bg-surface rounded-3xl p-6 ring-1 ring-border hover:ring-accent hover:-translate-y-1 transition-all">
+          {categories.map((c, i) => (
+            <Reveal key={c.name} delay={i * 0.08} from={i % 2 === 0 ? "left" : "right"} className="h-full">
+            <div className="group h-full bg-surface rounded-3xl p-6 ring-1 ring-border hover:ring-accent hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(25,18,13,0.1)] transition-all">
               <c.icon className="size-6 text-accent mb-6" />
               <h3 className="font-typemachine font-bold text-lg mb-2">{c.name}</h3>
               <p className="text-sm text-muted-foreground">{c.desc}</p>
             </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -78,11 +83,11 @@ function AgentsPage() {
       {/* Architecture */}
       <section className="bg-ink text-ink-foreground py-32">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl mb-16">
+          <Reveal className="max-w-2xl mb-16">
             <span className="text-[10px] font-mono text-accent uppercase tracking-widest">Architecture</span>
             <h2 className="font-typemachine text-4xl font-bold tracking-tight mt-4 mb-4">The Agent Stack</h2>
             <p className="text-ink-foreground/70">Each layer is replaceable, observable, and secure by default.</p>
-          </div>
+          </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {[
               { label: "User", desc: "Voice, text, API, webhook" },
@@ -91,7 +96,7 @@ function AgentsPage() {
               { label: "Integrations", desc: "CRM, ERP, Slack, DB" },
               { label: "Business Systems", desc: "Real outcomes, audited" },
             ].map((s, i) => (
-              <div key={s.label} className="relative">
+              <Reveal key={s.label} delay={i * 0.1} className="relative h-full">
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 ring-1 ring-white/10 h-full">
                   <span className="text-[10px] font-mono text-accent">{String(i + 1).padStart(2, "0")}</span>
                   <h4 className="font-typemachine font-bold mt-2 mb-2">{s.label}</h4>
@@ -100,7 +105,7 @@ function AgentsPage() {
                 {i < 4 && (
                   <div className="hidden md:block absolute top-1/2 -right-3 size-2 rounded-full bg-accent z-10" />
                 )}
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -108,34 +113,42 @@ function AgentsPage() {
 
       {/* Features */}
       <section className="max-w-7xl mx-auto px-6 py-32">
-        <h2 className="font-typemachine text-3xl font-bold mb-12">Capabilities</h2>
+        <Reveal>
+          <h2 className="font-typemachine text-3xl font-bold mb-12">Capabilities</h2>
+        </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map((f) => (
-            <div key={f.name} className="p-8 bg-surface ring-1 ring-border rounded-3xl">
+          {features.map((f, i) => (
+            <Reveal key={f.name} delay={i * 0.09} from={i % 2 === 0 ? "left" : "right"} className="h-full">
+            <div className="h-full p-8 bg-surface ring-1 ring-border rounded-3xl hover:ring-accent/40 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(25,18,13,0.1)] transition-all">
               <f.icon className="size-6 text-accent mb-6" />
               <h3 className="font-typemachine font-bold text-lg mb-2">{f.name}</h3>
               <p className="text-sm text-muted-foreground">{f.desc}</p>
             </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* Demos */}
       <section className="max-w-7xl mx-auto px-6 pb-32">
-        <h2 className="font-typemachine text-3xl font-bold mb-12">See Agents In Action</h2>
+        <Reveal>
+          <h2 className="font-typemachine text-3xl font-bold mb-12">See Agents In Action</h2>
+        </Reveal>
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { tag: "VOICE", title: "Inbound triage in real time" },
             { tag: "OPS", title: "Auto-reconcile invoices nightly" },
             { tag: "SALES", title: "Outbound personalization at scale" },
-          ].map((d) => (
-            <Link to="/contact" key={d.title} className="group bg-accent/5 ring-1 ring-accent/10 rounded-3xl p-8 hover:bg-accent/10 transition-all">
+          ].map((d, i) => (
+            <Reveal key={d.title} delay={i * 0.12} className="h-full">
+            <Link to="/contact" className="group block h-full bg-accent/5 ring-1 ring-accent/10 rounded-3xl p-8 hover:bg-accent/10 hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(25,18,13,0.1)] transition-all">
               <span className="text-[10px] font-mono text-accent uppercase tracking-widest">{d.tag}</span>
               <h3 className="font-typemachine text-xl font-bold mt-4 mb-6">{d.title}</h3>
               <span className="text-sm font-bold inline-flex items-center gap-2 group-hover:gap-3 transition-all">
                 Request demo <ArrowRight className="size-4" />
               </span>
             </Link>
+            </Reveal>
           ))}
         </div>
       </section>

@@ -12,6 +12,8 @@ export interface Product {
   desc: string;
   tags: string[];
   featured?: boolean;
+  imageUrl?: string;
+  href?: string;
 }
 
 /** Icons selectable for a product. The stored value is the string key. */

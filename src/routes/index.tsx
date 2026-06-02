@@ -123,7 +123,7 @@ function HomePage() {
             AI Agents · Agentic AI · Automation
           </div>
           <h1 className="font-gameplay text-4xl sm:text-6xl md:text-8xl tracking-tight text-balance break-words mb-8 animate-fade-up [animation-delay:100ms]">
-            Intelligence that <span className="text-accent">actually</span> acts.
+            Intelligence that <span className="animate-hero-blink text-accent">actually</span> acts.
           </h1>
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground text-pretty mb-12 animate-fade-up [animation-delay:200ms]">
             GOFTUS is an AI automation agency and AI agent development company building autonomous
@@ -169,6 +169,8 @@ function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           <Reveal as="div" from="left" className="md:col-span-8 group relative bg-surface rounded-[2rem] p-10 ring-1 ring-border overflow-hidden transition-transform hover:-translate-y-1">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
+            <div className="pointer-events-none absolute right-8 top-8 size-32 rounded-full bg-accent/10 blur-3xl agent-orb-drift" />
             <div className="relative z-10 flex flex-col h-full">
               <span className="text-[10px] font-mono text-accent mb-4">01 / AI AGENTS</span>
               <h3 className="font-typemachine text-3xl font-bold mb-4">AI agents that do the work</h3>
@@ -177,44 +179,72 @@ function HomePage() {
                 the tools, data, and channels your team already uses.
               </p>
               <div className="mt-auto w-full aspect-[2/1] bg-background rounded-2xl ring-1 ring-border grid place-items-center relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center gap-1">
-                  {Array.from({ length: 40 }).map((_, i) => (
+                <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full bg-surface/80 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground ring-1 ring-border backdrop-blur">
+                  <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+                  Live agent stream
+                </div>
+                <div className="absolute inset-x-8 top-1/2 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+                <div className="absolute inset-0 flex items-center justify-center gap-2">
+                  {Array.from({ length: 36 }).map((_, i) => (
                     <div
                       key={i}
-                      className="w-1 bg-accent/60 rounded-full"
+                      className="w-1 rounded-full bg-gradient-to-b from-accent/35 via-accent/90 to-accent/35 agent-wave-bar shadow-[0_0_18px_color-mix(in_oklab,var(--color-accent)_28%,transparent)]"
                       style={{
-                        height: `${20 + Math.abs(Math.sin(i * 0.4)) * 80}%`,
-                        animation: `fade-in 1.2s ease-out ${i * 30}ms both`,
+                        height: `${30 + Math.abs(Math.sin(i * 0.48)) * 62}%`,
+                        animationDelay: `${i * 95}ms`,
+                        animationDuration: `${2400 + (i % 6) * 180}ms`,
                       }}
                     />
                   ))}
                 </div>
-                <Bot className="absolute top-4 right-4 size-5 text-muted-foreground/40" />
+                <div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-accent ring-1 ring-accent/20">
+                  42 requests routed
+                </div>
+                <Bot className="absolute top-4 right-4 size-5 text-muted-foreground/40 agent-bot-float" />
               </div>
             </div>
           </Reveal>
 
-          <Reveal as="div" from="right" delay={0.1} className="md:col-span-4 flex flex-col bg-accent/5 rounded-[2rem] p-10 ring-1 ring-accent/10 transition-transform hover:-translate-y-1">
-            <Boxes className="size-6 text-accent mb-6" />
+          <Reveal as="div" from="right" delay={0.1} className="md:col-span-4 relative overflow-hidden bg-accent/5 rounded-[2rem] p-10 ring-1 ring-accent/10 transition-transform hover:-translate-y-1">
+            <div className="pointer-events-none absolute -right-12 -top-12 size-44 rounded-full bg-accent/10 blur-3xl agent-orb-drift" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,color-mix(in_oklab,var(--color-accent)_12%,transparent),transparent_34%)]" />
+            <div className="relative z-10">
+            <div className="mb-5 flex items-center justify-between gap-4">
+              <Boxes className="size-6 text-accent" />
+              <span className="inline-flex items-center gap-2 rounded-full bg-background/70 px-3 py-1.5 text-[10px] font-mono uppercase tracking-widest text-muted-foreground ring-1 ring-border">
+                <span className="size-1.5 rounded-full bg-accent animate-pulse" />
+                Live
+              </span>
+            </div>
             <span className="text-[10px] font-mono text-accent mb-2 block">02 / AGENTIC AI</span>
             <h3 className="font-typemachine text-2xl font-bold mb-4">Agentic AI systems</h3>
             <p className="text-muted-foreground text-sm">
               Multi-agent systems that reason, plan, and coordinate across tools to complete
               multi-step work with oversight.
             </p>
+            <div className="mt-5 grid grid-cols-2 gap-3">
+              <div className="rounded-2xl bg-background/65 p-3 ring-1 ring-border">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Agents</p>
+                <p className="mt-1 font-typemachine text-xl font-bold">03 active</p>
+              </div>
+              <div className="rounded-2xl bg-background/65 p-3 ring-1 ring-border">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Tools</p>
+                <p className="mt-1 font-typemachine text-xl font-bold">12 linked</p>
+              </div>
+            </div>
 
             {/* Multi-agent coordination diagram */}
-            <div className="mt-auto pt-10">
+            <div className="mt-8 rounded-[1.5rem] bg-background/50 p-5 ring-1 ring-border">
               {/* Orchestrator */}
               <div className="flex justify-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-accent text-accent-foreground shadow-sm">
+                <div className="agent-orchestrator inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-accent text-accent-foreground shadow-sm">
                   <Network className="size-4" />
                   <span className="text-[11px] font-bold tracking-wide">Orchestrator</span>
                 </div>
               </div>
               {/* Drop from orchestrator into the bus */}
               <div className="flex justify-center">
-                <div className="h-5 w-px bg-accent/40" />
+                <div className="h-5 w-px bg-accent/40 agent-flow-line" />
               </div>
               {/* Worker agents */}
               <div className="grid grid-cols-3">
@@ -227,14 +257,14 @@ function HomePage() {
                     {/* horizontal bus + vertical drop */}
                     <div className="relative w-full h-5">
                       <div
-                        className={`absolute top-0 h-px bg-accent/40 ${
+                        className={`absolute top-0 h-px bg-accent/40 agent-flow-line ${
                           i === 0 ? "left-1/2 right-0" : i === 2 ? "left-0 right-1/2" : "left-0 right-0"
                         }`}
                       />
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-5 w-px bg-accent/40" />
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-5 w-px bg-accent/40 agent-flow-line" />
                     </div>
                     <div className="flex flex-col items-center gap-2">
-                      <div className="size-11 rounded-2xl bg-background ring-1 ring-border grid place-items-center transition-colors hover:ring-accent">
+                      <div className="agent-node size-11 rounded-2xl bg-background ring-1 ring-border grid place-items-center transition-colors hover:ring-accent" style={{ animationDelay: `${i * 180}ms` }}>
                         <a.icon className="size-4 text-accent" />
                       </div>
                       <span className="text-[10px] font-semibold text-muted-foreground">{a.label}</span>
@@ -243,6 +273,7 @@ function HomePage() {
                 ))}
               </div>
             </div>
+          </div>
           </Reveal>
 
           <Reveal as="div" delay={0.05} className="md:col-span-4 bg-surface rounded-[2rem] p-10 ring-1 ring-border transition-transform hover:-translate-y-1">

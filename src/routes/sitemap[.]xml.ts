@@ -6,7 +6,7 @@ const BASE_URL = "";
 
 interface SitemapEntry {
   path: string;
-  changefreq?: "daily" | "weekly" | "monthly";
+  changefreq?: "daily" | "weekly" | "monthly" | "yearly";
   priority?: string;
 }
 
@@ -22,6 +22,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/about", changefreq: "monthly", priority: "0.7" },
           { path: "/blog", changefreq: "weekly", priority: "0.8" },
           { path: "/contact", changefreq: "monthly", priority: "0.7" },
+          { path: "/privacy", changefreq: "yearly", priority: "0.3" },
+          { path: "/terms", changefreq: "yearly", priority: "0.3" },
+          { path: "/security", changefreq: "monthly", priority: "0.5" },
           // Individual blog posts (seed content is server-rendered for SEO).
           ...posts.map((p) => ({
             path: `/blog/${p.slug}`,

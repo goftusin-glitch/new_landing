@@ -2,9 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { CTASection } from "@/components/site/CTASection";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Play } from "lucide-react";
 import { getPost, type Post } from "@/data/posts";
 import { getStoredPosts } from "@/lib/content-store";
+import { fetchPostFromBackend, fetchPostsFromBackend } from "@/lib/backend-api";
 import { keywords, CORE_KEYWORDS } from "@/data/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -69,11 +70,29 @@ function BlogPostPage() {
   const [resolved, setResolved] = useState(!!seed);
 
   useEffect(() => {
+    let cancelled = false;
     const stored = getStoredPosts();
     setAllPosts(stored);
     const found = stored.find((p) => p.slug === slug) ?? null;
     setPost(found ?? seed);
     setResolved(true);
+    fetchPostFromBackend(slug)
+      .then((backendPost) => {
+        if (!cancelled) setPost(backendPost);
+      })
+      .catch(() => {
+        if (!cancelled) setPost(found ?? seed);
+      });
+    fetchPostsFromBackend()
+      .then((items) => {
+        if (!cancelled) setAllPosts(items.length ? items : stored);
+      })
+      .catch(() => {
+        if (!cancelled) setAllPosts(stored);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [slug, seed]);
 
   if (!post) {
@@ -111,7 +130,17 @@ function BlogPostPage() {
 
         {/* Cover */}
         <div className="max-w-5xl mx-auto px-6 mb-16">
-          <div className="aspect-[16/7] rounded-[2rem] bg-gradient-to-br from-accent/25 via-accent/10 to-transparent ring-1 ring-border" />
+          {post.contentType === "video" && post.videoUrl ? (
+            <VideoFrame post={post} />
+          ) : post.coverImage || post.thumbnailImage ? (
+            <img
+              src={post.coverImage || post.thumbnailImage}
+              alt={post.title}
+              className="aspect-[16/7] w-full rounded-[2rem] object-cover ring-1 ring-border"
+            />
+          ) : (
+            <div className="aspect-[16/7] rounded-[2rem] bg-gradient-to-br from-accent/25 via-accent/10 to-transparent ring-1 ring-border" />
+          )}
         </div>
 
         {/* Body */}
@@ -165,7 +194,7 @@ function BlogPostPage() {
         </section>
       )}
 
-      <CTASection title="Have a project in mind?" primaryLabel="Talk to us" secondaryLabel="See our products" secondaryTo="/services" />
+      <CTASection title="Have a project in mind?" primaryLabel="Talk to us" secondaryLabel="See our products" secondaryTo="/products" />
     </SiteLayout>
   );
 }
@@ -182,5 +211,62 @@ function PostNotFound() {
         </Link>
       </section>
     </SiteLayout>
+  );
+}
+
+function toEmbedUrl(url?: string) {
+  if (!url) return "";
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) {
+      const id = parsed.pathname.split("/").filter(Boolean)[0];
+      return id ? `https://www.youtube.com/embed/${id}` : "";
+    }
+    if (parsed.hostname.includes("youtube.com")) {
+      const watchId = parsed.searchParams.get("v");
+      if (watchId) return `https://www.youtube.com/embed/${watchId}`;
+      const parts = parsed.pathname.split("/").filter(Boolean);
+      if ((parts[0] === "shorts" || parts[0] === "embed") && parts[1]) {
+        return `https://www.youtube.com/embed/${parts[1]}`;
+      }
+    }
+    if (parsed.hostname.includes("vimeo.com")) {
+      const id = parsed.pathname.split("/").filter(Boolean)[0];
+      return id ? `https://player.vimeo.com/video/${id}` : "";
+    }
+  } catch {
+    return "";
+  }
+  return "";
+}
+
+function VideoFrame({ post }: { post: Post }) {
+  const embedUrl = toEmbedUrl(post.videoUrl);
+  return (
+    <div className="overflow-hidden rounded-[2rem] bg-ink ring-1 ring-border">
+      {embedUrl ? (
+        <iframe
+          src={embedUrl}
+          title={post.title}
+          className="aspect-video w-full"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <video
+          controls
+          playsInline
+          preload="metadata"
+          poster={post.thumbnailImage || post.coverImage}
+          className="aspect-video w-full bg-black"
+        >
+          <source src={post.videoUrl} />
+        </video>
+      )}
+      <div className="flex items-center gap-2 px-5 py-3 text-xs font-mono uppercase tracking-widest text-ink-foreground/70">
+        <Play className="size-4 text-accent" /> Video
+      </div>
+    </div>
   );
 }

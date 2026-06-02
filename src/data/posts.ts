@@ -17,6 +17,10 @@ export interface Post {
   featured?: boolean;
   intro: string;
   sections: PostSection[];
+  coverImage?: string;
+  thumbnailImage?: string;
+  contentType?: "article" | "video";
+  videoUrl?: string;
 }
 
 export const posts: Post[] = [

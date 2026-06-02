@@ -90,6 +90,7 @@
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-glow-drift: glow-drift 15s infinite alternate;
+  --animate-hero-blink: hero-blink 1s ease-in-out 1 both;
 
   @keyframes fade-up {
     0% { opacity: 0; transform: translateY(20px); }
@@ -102,6 +103,299 @@
   @keyframes glow-drift {
     0%, 100% { transform: translate(-10%, -10%); }
     50% { transform: translate(10%, 10%); }
+  }
+  @keyframes hero-blink {
+    0%, 20%, 40%, 60%, 80%, 100% { opacity: 1; }
+    10%, 30%, 50%, 70% { opacity: 0.18; }
+  }
+}
+
+@keyframes agent-wave {
+  0%, 100% {
+    transform: scaleY(0.68);
+    opacity: 0.58;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes agent-node-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-accent) 0%, transparent);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px color-mix(in oklab, var(--color-accent) 14%, transparent);
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes agent-flow {
+  0%, 100% {
+    opacity: 0.28;
+    filter: drop-shadow(0 0 0 color-mix(in oklab, var(--color-accent) 0%, transparent));
+  }
+  50% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 6px color-mix(in oklab, var(--color-accent) 60%, transparent));
+  }
+}
+
+@keyframes agent-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(2deg); }
+}
+
+@keyframes agent-orb-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-12px, 10px, 0) scale(1.08); }
+}
+
+@keyframes cta-title-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes cta-glow-drift {
+  0%, 100% { transform: translate3d(-2%, -3%, 0) scale(1); }
+  50% { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+
+@keyframes cta-orb-one {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+  50% { transform: translate3d(34px, -18px, 0) scale(1.12); opacity: 0.82; }
+}
+
+@keyframes cta-orb-two {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.42; }
+  50% { transform: translate3d(-28px, 20px, 0) scale(1.1); opacity: 0.64; }
+}
+
+@keyframes cta-grid-shift {
+  0% { background-position: 0 0; }
+  100% { background-position: 44px 44px; }
+}
+
+@keyframes cta-particle {
+  0%, 100% {
+    opacity: 0.18;
+    transform: translate3d(0, 0, 0) scale(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate3d(18px, -22px, 0) scale(1.2);
+  }
+}
+
+@keyframes service-card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes service-card-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes service-card-glow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.42;
+  }
+  50% {
+    transform: translate3d(-18px, 16px, 0) scale(1.16);
+    opacity: 0.85;
+  }
+}
+
+@keyframes service-card-line {
+  0%, 100% {
+    opacity: 0.18;
+    transform: translateX(-18%);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(18%);
+  }
+}
+
+@keyframes service-card-sheen {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  28% {
+    opacity: 0.65;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(340%);
+  }
+}
+
+@keyframes process-card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.94);
+    filter: blur(7px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes process-card-pop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    transform: translateY(-10px) scale(1.035);
+  }
+  100% {
+    transform: translateY(-6px) scale(1.018);
+  }
+}
+
+@keyframes process-card-glow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-16px, 14px, 0) scale(1.2);
+  }
+}
+
+.agent-wave-bar {
+  animation-name: agent-wave;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
+  transform-origin: center;
+}
+
+.agent-node {
+  animation: agent-node-pulse 2.1s ease-in-out infinite;
+}
+
+.agent-flow-line {
+  animation: agent-flow 1.7s ease-in-out infinite;
+}
+
+.agent-orchestrator {
+  animation: agent-node-pulse 2.4s ease-in-out infinite;
+}
+
+.agent-bot-float {
+  animation: agent-float 2.8s ease-in-out infinite;
+}
+
+.agent-orb-drift {
+  animation: agent-orb-drift 9s ease-in-out infinite;
+}
+
+.cta-title-word {
+  animation: cta-title-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.cta-glow-drift {
+  animation: cta-glow-drift 12s ease-in-out infinite;
+}
+
+.cta-orb-one {
+  animation: cta-orb-one 10s ease-in-out infinite;
+}
+
+.cta-orb-two {
+  animation: cta-orb-two 12s ease-in-out infinite;
+}
+
+.cta-live-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, white 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, white 10%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+  animation: cta-grid-shift 18s linear infinite;
+}
+
+.cta-particle {
+  animation: cta-particle 5.6s ease-in-out infinite;
+}
+
+.service-card {
+  animation:
+    service-card-enter 0.8s cubic-bezier(0.16, 1, 0.3, 1) both,
+    service-card-float 5.8s ease-in-out infinite;
+}
+
+.service-card:hover .service-card-glow {
+  animation: service-card-glow 3.2s ease-in-out infinite;
+}
+
+.service-card:hover .service-card-line {
+  animation: service-card-line 2.4s ease-in-out infinite;
+}
+
+.service-card:hover .service-card-sheen {
+  animation: service-card-sheen 1.1s ease-out both;
+}
+
+.process-card:hover {
+  animation: process-card-pop 0.46s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.process-card.process-card-dark:hover {
+  animation: none;
+  transform: translateY(-4px);
+}
+
+.process-card:hover .process-card-glow {
+  animation: process-card-glow 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-wave-bar,
+  .agent-node,
+  .agent-flow-line,
+  .agent-orchestrator,
+  .agent-bot-float,
+  .agent-orb-drift,
+  .cta-title-word,
+  .cta-glow-drift,
+  .cta-orb-one,
+  .cta-orb-two,
+  .cta-live-grid,
+  .cta-particle,
+  .service-card,
+  .service-card-glow,
+  .service-card-line,
+  .service-card-sheen,
+  .process-card,
+  .process-card-glow {
+    animation: none;
   }
 }
 

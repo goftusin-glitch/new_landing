@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { CTASection } from "@/components/site/CTASection";
 import { ArrowLeft, ArrowRight, Play } from "lucide-react";
@@ -9,9 +10,11 @@ import { fetchPostFromBackend, fetchPostsFromBackend } from "@/lib/backend-api";
 import { keywords, CORE_KEYWORDS } from "@/data/seo";
 
 export const Route = createFileRoute("/blog/$slug")({
-  // Seed posts resolve at the server for full SSR/SEO; admin-created posts
-  // (stored only in the browser) resolve client-side in the component.
-  loader: ({ params }) => getPost(params.slug) ?? null,
+  loader: async ({ params }) => {
+    const seed = getPost(params.slug);
+    if (seed) return seed;
+    return fetchPostFromBackend(params.slug).catch(() => null);
+  },
   head: ({ loaderData: post }) => {
     if (!post) return {};
     const url = `/blog/${post.slug}`;
@@ -60,43 +63,21 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const seed = Route.useLoaderData();
+  const post = Route.useLoaderData();
   const { slug } = Route.useParams();
-
-  // Start from the SSR seed, then resolve from the browser store (covers
-  // admin-created/edited posts that only live in localStorage).
-  const [post, setPost] = useState<Post | null>(seed);
   const [allPosts, setAllPosts] = useState<Post[]>([]);
-  const [resolved, setResolved] = useState(!!seed);
 
   useEffect(() => {
     let cancelled = false;
     const stored = getStoredPosts();
-    setAllPosts(stored);
-    const found = stored.find((p) => p.slug === slug) ?? null;
-    setPost(found ?? seed);
-    setResolved(true);
-    fetchPostFromBackend(slug)
-      .then((backendPost) => {
-        if (!cancelled) setPost(backendPost);
-      })
-      .catch(() => {
-        if (!cancelled) setPost(found ?? seed);
-      });
     fetchPostsFromBackend()
-      .then((items) => {
-        if (!cancelled) setAllPosts(items.length ? items : stored);
-      })
-      .catch(() => {
-        if (!cancelled) setAllPosts(stored);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [slug, seed]);
+      .then((items) => { if (!cancelled) setAllPosts(items.length ? items : stored); })
+      .catch(() => { if (!cancelled) setAllPosts(stored); });
+    return () => { cancelled = true; };
+  }, []);
 
   if (!post) {
-    return resolved ? <PostNotFound /> : <SiteLayout><div className="py-40" /></SiteLayout>;
+    return <PostNotFound />;
   }
 
   const pool = allPosts.length ? allPosts : [];

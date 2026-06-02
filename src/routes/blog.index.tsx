@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { Search } from "lucide-react";
 import { useStoredPosts } from "@/lib/content-store";
-import { fetchPostsFromBackend, fetchPostsSlice } from "@/lib/backend-api";
+import { fetchPostsFromBackend, fetchPostsSlice, getPostsCache, getPostsInFlight } from "@/lib/backend-api";
 import { keywords, BLOG_KEYWORDS } from "@/data/seo";
 
 const BLOG_TITLE = "AI Agents & Automation Blog — Agentic AI Insights & Guides | GOFTUS";
@@ -124,13 +124,30 @@ function BlogPage() {
 
   useEffect(() => {
     let cancelled = false;
-    // Phase 1 — fetch first 4 posts fast (small payload)
+
+    // Case 1: prefetch already resolved — instant, no skeleton
+    const cached = getPostsCache();
+    if (cached?.length) {
+      setPosts(cached);
+      setLoading(false);
+      return;
+    }
+
+    // Case 2: prefetch in-flight (started by SiteLayout on another page)
+    const inFlight = getPostsInFlight();
+    if (inFlight) {
+      inFlight.then((all) => {
+        if (!cancelled) { if (all.length) setPosts(all); setLoading(false); }
+      }).catch(() => { if (!cancelled) setLoading(false); });
+      return () => { cancelled = true; };
+    }
+
+    // Case 3: page refreshed directly on /blog — progressive load
     fetchPostsSlice(4)
       .then((initial) => {
         if (cancelled) return;
         if (initial.length) setPosts(initial);
         setLoading(false);
-        // Phase 2 — fetch all remaining in background
         fetchPostsFromBackend()
           .then((all) => { if (!cancelled && all.length) setPosts(all); })
           .catch(() => {});
@@ -138,7 +155,6 @@ function BlogPage() {
       .catch(() => {
         if (!cancelled) {
           setLoading(false);
-          // Fallback: try full fetch
           fetchPostsFromBackend()
             .then((all) => { if (!cancelled && all.length) setPosts(all); })
             .catch(() => {});

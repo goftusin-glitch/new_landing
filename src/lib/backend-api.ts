@@ -277,6 +277,20 @@ export const fetchProductsFromBackend = async () => {
   return products.map(mapBackendProduct);
 };
 
+/* ── posts cache ── */
+let _postsCache: Post[] | null = null;
+let _postsInFlight: Promise<Post[]> | null = null;
+
+export const prefetchPosts = (): void => {
+  if (_postsCache || _postsInFlight) return;
+  _postsInFlight = fetchPostsFromBackend()
+    .then((posts) => { _postsCache = posts; _postsInFlight = null; return posts; })
+    .catch(() => { _postsInFlight = null; return []; });
+};
+
+export const getPostsCache = (): Post[] | null => _postsCache;
+export const getPostsInFlight = (): Promise<Post[]> | null => _postsInFlight;
+
 export const fetchPostsSlice = async (limit: number) => {
   const response = await fetch(`${API_BASE}/posts?page=1&limit=${limit}`);
   const data = await parseJson<{ posts?: BackendPost[] }>(response);

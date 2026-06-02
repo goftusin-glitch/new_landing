@@ -1,0 +1,212 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@font-face {
+  font-family: "Cowboys";
+  src: url("/fonts/cowboys.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gameplay";
+  src: url("/fonts/gameplay.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Beat Tech";
+  src: url("/fonts/beattech.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Type Machine";
+  src: url("/fonts/typemachine.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Romanica";
+  src: url("/fonts/romanica.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-western: "Cowboys", ui-serif, serif;
+  --font-gameplay: "Gameplay", ui-sans-serif, system-ui, sans-serif;
+  --font-beattech: "Beat Tech", ui-sans-serif, system-ui, sans-serif;
+  --font-typemachine: "Type Machine", ui-sans-serif, system-ui, sans-serif;
+  --font-romanica: "Romanica", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-glow-drift: glow-drift 15s infinite alternate;
+
+  @keyframes fade-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes glow-drift {
+    0%, 100% { transform: translate(-10%, -10%); }
+    50% { transform: translate(10%, 10%); }
+  }
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Warm cream */
+  --background: oklch(0.972 0.012 85);
+  --foreground: oklch(0.22 0.012 70);
+
+  --surface: oklch(1 0 0);
+  --surface-foreground: oklch(0.22 0.012 70);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.012 70);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.012 70);
+
+  /* Foreground is the primary "ink" */
+  --primary: oklch(0.22 0.012 70);
+  --primary-foreground: oklch(0.972 0.012 85);
+
+  --secondary: oklch(0.94 0.014 80);
+  --secondary-foreground: oklch(0.22 0.012 70);
+
+  --muted: oklch(0.94 0.014 80);
+  --muted-foreground: oklch(0.45 0.014 70);
+
+  /* Burnt sienna accent */
+  --accent: oklch(0.62 0.165 42);
+  --accent-foreground: oklch(0.98 0.01 80);
+
+  --ink: oklch(0.2 0.012 60);
+  --ink-foreground: oklch(0.972 0.012 85);
+
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.98 0.01 80);
+
+  --border: oklch(0.22 0.012 70 / 0.1);
+  --input: oklch(0.22 0.012 70 / 0.12);
+  --ring: oklch(0.62 0.165 42 / 0.5);
+
+  --sidebar: oklch(0.972 0.012 85);
+  --sidebar-foreground: oklch(0.22 0.012 70);
+  --sidebar-primary: oklch(0.22 0.012 70);
+  --sidebar-primary-foreground: oklch(0.972 0.012 85);
+  --sidebar-accent: oklch(0.94 0.014 80);
+  --sidebar-accent-foreground: oklch(0.22 0.012 70);
+  --sidebar-border: oklch(0.22 0.012 70 / 0.1);
+  --sidebar-ring: oklch(0.62 0.165 42 / 0.5);
+
+  --color-chart-1: oklch(0.62 0.165 42);
+  --color-chart-2: oklch(0.55 0.12 60);
+  --color-chart-3: oklch(0.45 0.06 70);
+  --color-chart-4: oklch(0.75 0.1 50);
+  --color-chart-5: oklch(0.4 0.04 70);
+}
+
+.dark {
+  --background: oklch(0.18 0.01 60);
+  --foreground: oklch(0.96 0.01 80);
+  --surface: oklch(0.22 0.01 60);
+  --surface-foreground: oklch(0.96 0.01 80);
+  --card: oklch(0.22 0.01 60);
+  --card-foreground: oklch(0.96 0.01 80);
+  --popover: oklch(0.22 0.01 60);
+  --popover-foreground: oklch(0.96 0.01 80);
+  --primary: oklch(0.96 0.01 80);
+  --primary-foreground: oklch(0.2 0.01 60);
+  --secondary: oklch(0.28 0.01 60);
+  --secondary-foreground: oklch(0.96 0.01 80);
+  --muted: oklch(0.28 0.01 60);
+  --muted-foreground: oklch(0.7 0.01 70);
+  --accent: oklch(0.7 0.16 42);
+  --accent-foreground: oklch(0.18 0.01 60);
+  --ink: oklch(0.12 0.01 60);
+  --ink-foreground: oklch(0.96 0.01 80);
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: oklch(0.98 0.01 80);
+  --border: oklch(1 0 0 / 0.1);
+  --input: oklch(1 0 0 / 0.12);
+  --ring: oklch(0.7 0.16 42 / 0.6);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@utility glow-bg {
+  background: radial-gradient(circle at center, color-mix(in oklab, var(--color-accent) 10%, transparent) 0%, transparent 70%);
+}

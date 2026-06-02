@@ -12,24 +12,20 @@ const offset: Record<Direction, { x: number; y: number }> = {
 interface RevealProps {
   children: ReactNode;
   className?: string;
-  /** Stagger delay in seconds. */
   delay?: number;
-  /** Entrance direction — controls the tilt + slide axis. */
   from?: Direction;
-  /** Render as a specific tag (e.g. "section", "article"). */
   as?: "div" | "section" | "article" | "li";
+  /** Framer Motion viewport margin. "0px" triggers as soon as element enters view. */
+  viewportMargin?: string;
 }
 
-/**
- * Scroll-triggered 3D reveal. Content rises out of the page on a perspective
- * tilt, settling flat as it enters the viewport. Plays once per element.
- */
 export function Reveal({
   children,
   className,
   delay = 0,
   from = "up",
   as = "div",
+  viewportMargin = "-90px",
 }: RevealProps) {
   const MotionTag = motion[as];
   const { x, y } = offset[from];
@@ -47,7 +43,7 @@ export function Reveal({
         scale: 0.85,
       }}
       whileInView={{ opacity: 1, x: 0, y: 0, rotateX: 0, rotateY: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-90px" }}
+      viewport={{ once: true, margin: viewportMargin }}
       transition={{
         duration: 0.85,
         delay,

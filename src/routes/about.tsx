@@ -159,6 +159,7 @@ function AboutPage() {
               key={i}
               from="up"
               delay={(i % 4) * 0.06}
+              viewportMargin="0px"
               className={`${g.span} group rounded-2xl overflow-hidden ring-1 ring-border`}
             >
               <img

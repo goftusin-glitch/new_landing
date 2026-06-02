@@ -123,6 +123,8 @@ function AboutPage() {
                 <img
                   src={f.photo}
                   alt={f.name}
+                  loading="lazy"
+                  decoding="async"
                   className={`size-16 rounded-full object-cover ${f.objectPos} ring-2 ring-accent shrink-0`}
                 />
                 <div>
@@ -162,6 +164,8 @@ function AboutPage() {
               <img
                 src={g.src}
                 alt={g.alt}
+                loading="lazy"
+                decoding="async"
                 className={`w-full h-full object-cover ${g.pos} transition-transform duration-500 group-hover:scale-105`}
               />
             </Reveal>
